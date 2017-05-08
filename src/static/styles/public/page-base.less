@@ -1,0 +1,133 @@
+/**
+ * 系统页面基本样式
+ * page-base
+ */
+
+/**
+ * 页面菜单样式
+ *
+ * 当内嵌到其它系统时需挡开注掉的下面代码
+ */
+
+// .nav-md .container.body .left_col {
+//     display: none !important;
+// }
+// .nav-md .container.body .right_col {
+//     margin-left: 0px;
+//     padding: 30px 20px 0px;
+// }
+.nav_title {
+  width: 150px !important;
+  background: #464c5b;
+  span {
+    font-size: 16px
+  }
+}
+
+.nav-md .container.body .left_col {
+  // display: none !important;
+  width: 150px !important;
+}
+
+.nav-md .container.body .right_col {
+  margin-left: 150px;
+  padding: 30px 20px 0px;
+  padding-top: 10px;
+}
+
+// footer {
+//     margin-left: 120px !important;
+// }
+//
+//
+.left_col {
+  // background: #2A3F54;
+  height: 100%;
+  position: fixed;
+  width: 230px;
+  background: #464c5b
+}
+
+.line > .x_panel > .x_title {
+  position: absolute;
+  z-index: 99;
+}
+
+i.ivu-icon-plus-round {
+  cursor: pointer;
+}
+
+.main_container footer {
+  background: #fff;
+  padding: 15px 20px;
+  display: block;
+}
+
+.ivu-table {
+  // overflow: auto;
+  table {
+    /**
+     * TODO
+     * 因为 iview 表格自动计算宽度的方法有问题，这里覆盖掉它计算的自动宽度
+     */
+    min-width: 800px;
+    width: 100% !important;
+    table-layout: auto;
+  }
+  .ivu-table-body {
+    // overflow: hidden;
+  }
+}
+
+.loop(@counter) when (@counter > 400) {
+  .loop((@counter - 100));
+  .min-table-width-@{counter} {
+    .ivu-table table {
+      min-width: @counter*1px;
+    }
+  }
+}
+
+.loop(1000);
+
+.ivu-table .ivu-table-title {
+  height: auto;
+  line-height: 39px
+}
+
+.top-table {
+  .ivu-table {
+    table {
+      min-width: 100px;
+      tr.ivu-table-row-hover td {
+        background: transparent;
+      }
+    }
+  }
+}
+
+.loopchart(@counter) when (@counter > 400) {
+  .loopchart((@counter - 100));
+  .min-chart-width-@{counter} {
+    overflow-x: auto;
+    .echarts {
+      min-width: @counter*1px !important;
+      overflow: hidden;
+    }
+  }
+}
+
+.loopchart(1000);
+
+.ivu-select .ivu-select-dropdown {
+  width: auto !important;
+  min-width: 100px;
+}
+
+.nav.side-menu > li > a{
+  font-size: 14px;
+  .ivu-icon:before{
+    font-size: 16px;
+    margin-right: 5px;
+  }
+}

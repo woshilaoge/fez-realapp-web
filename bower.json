@@ -1,0 +1,72 @@
+{
+    "name": "demo-web",
+    "authors": [
+        "xulongfei <xulongfei1@jd.com>"
+    ],
+    "description": "应用",
+    "main": "",
+    "license": "MIT",
+    "homepage": "",
+    "private": true,
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "jquery": "^3.1.1",
+        "vue": "^2.1.6",
+        "bootstrap": "^3.3.7",
+        "font-awesome": "^4.7.0",
+        "nprogress": "^0.2.0",
+        "pnotify": "^3.0.0",
+        "echarts": "^3.3.2",
+        "moment": "^2.17.1",
+        "iview.min": "https://unpkg.com/iview/dist/iview.min.js",
+        "lodash": "^4.17.4"
+    },
+    "overrides": {
+        "echarts": {
+            "main": [
+                "dist/echarts.js"
+            ]
+        },
+        "font-awesome": {
+            "main": [
+                "css/font-awesome.css",
+                "fonts/FontAwesome.otf",
+                "fonts/fontawesome-webfont.eot",
+                "fonts/fontawesome-webfont.svg",
+                "fonts/fontawesome-webfont.ttf",
+                "fonts/fontawesome-webfont.woff",
+                "fonts/fontawesome-webfont.woff2"
+            ]
+        },
+        "vue": {
+            "main": [
+                "dist/vue.js"
+            ]
+        },
+        "bootstrap": {
+            "main": [
+                "dist/css/bootstrap.css",
+                "dist/js/bootstrap.js",
+                "./dist/fonts/**.*"
+            ]
+        },
+        "pnotify": {
+            "main": [
+                "dist/pnotify.js",
+                "dist/pnotify.css"
+            ]
+        },
+        "moment": {
+            "main": [
+                "moment.js",
+                "locale/zh-cn.js"
+            ]
+        }
+    }
+}

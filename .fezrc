@@ -1,0 +1,96 @@
+{
+    "useMock": {
+        "dev": true, //dev打包使用Mock数据
+        "dist": true //dist打包使用Mock数据
+    },
+    /**
+     * 选择css编译器【取值:less/sass/css】
+     */
+    "cssCompiler": "less",
+
+    /**
+     * ***** html自动化注入文件 ***********
+     * 【支持自定义打包多个文件到一个文件】
+     * 【支持自定义打包单个文件】
+     * 【未配置的文件自动打包成一个文件】
+     * 【插入页面顺序以字母或数字降序排列-解决插入页面的脚本文件依赖关系】
+     * 【打包顺序以文件配置先后降序排列-解决打包文件间的依赖关系】
+     */
+    "useInject": {
+        "bower": {
+            "available": true, //启用 bower 文件自动化注入
+            "js": [{
+                "target": "A-vendor-jquery-bootstrap-vue.js",
+                "contain": ["**/jquery.js", "**/bootstrap.js", "**/vue.js"]
+            }, {
+                "target": "vendor-dataTables.js",
+                "contain": ["**/jquery.dataTables.js", "**/dataTables.bootstrap.js", "**/dataTables.responsive.js", "**/responsive.bootstrap.js", "**/dataTables.fixedColumns.js", "**/dataTables.fixedHeader.js"]
+            }, {
+                "target": "vendor-moment.js",
+                "contain": ["moment/**/moment.js", "moment/**/zh-cn.js"]
+            }, {
+                "target": "vendor-echarts.js",
+                "contain": ["**/echarts.js"]
+            }],
+            "css": [{
+                "target": "vendor-bootstrap.css",
+                "contain": ["**/bootstrap.css"]
+            }, {
+                "target": "vendor-font-awesome.css",
+                "contain": ["**/font-awesome.css"]
+            }, {
+                "target": "vendor-dataTables-bt.css",
+                "contain": ["**/dataTables.bootstrap.css", "**/responsive.bootstrap.css", "**/fixedColumns.bootstrap.css", "**/fixedHeader.bootstrap.css"]
+            }]
+        },
+        /**
+         * 【支持单个文件指定注入到某些页面（命名规则：assign-{页面名}-{页面名}-{other}】
+         */
+        "lib": {
+            "available": true, //启用 公共 文件自动化注入
+            "css": "*common*", //以common命名的样式文件会注入到所有的页面
+            /**
+             * 公共脚本文件
+             */
+            "js": [{
+                "target": "common-promise.js",
+                "contain": ["**/q.js"]
+            }]
+        },
+        /**
+         * 【支持src目录中的样式及编译后的逻辑脚本自动化注入到对应的页面】
+         */
+        "views": true //启用 业务目录 文件自动化注入
+    },
+
+    /**
+     * bowserify配置
+     */
+    "browserify": {
+        "options": {
+            "extensions": [], // import require 引入文件时可以省略的扩展名
+            "paths": ["./src/views"]
+        },
+        /**
+         * 抽取来自NPM中的公共文件不做打包
+         * import $ from 'jquery';
+         * let $ = require('jquery');
+         */
+        "shim": [{
+            "import": "$",
+            "from": "jquery"
+        }, {
+            "import": "Q",
+            "from": "q"
+        }, {
+            "import": "Vue",
+            "from": "vue"
+        }, {
+            "import": "PNotify",
+            "from": "pnotify"
+        }, {
+            "import": "echarts",
+            "from": "echarts"
+        }]
+    }
+}
