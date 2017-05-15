@@ -2,10 +2,10 @@ fez-realapp-web
 ====
 powerby echarts3+vue2+iview+mock
 
-By xulongfei   2017/4/26
+By xiaoxianxuezhang   2017/4/26
 
 
-## UI库iView（https://www.iviewui.com）
+## UI库iView（ https://www.iviewui.com ）
 
 ### JS目录结构
 
