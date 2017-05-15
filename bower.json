@@ -1,9 +1,9 @@
 {
-    "name": "quota-web",
+    "name": "real-web",
     "authors": [
         "xulongfei <xulongfei1@jd.com>"
     ],
-    "description": "数立方实时应用",
+    "description": "vue-demo",
     "main": "",
     "license": "MIT",
     "homepage": "",
