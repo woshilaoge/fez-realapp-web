@@ -1,102 +1,4 @@
-// @import './common.less';
-//-----------------------------------------------
 .right_col {
-    .headroom-wrapper{
-        height: auto !important;
-    }
-    .headroom {
-        .waring .city-picker-span .placeholder {
-            color: red;
-        }
-        .btn-group.form-group {
-            margin: 0px 5px;
-            .search {
-                margin-left: 20px;
-                color: #00C584;
-                border: 1px solid #00C584;
-                &:hover {
-                    color: #fff;
-                    background-color: #00C584;
-                }
-            }
-        }
-        .city-picker-span.open > .arrow {
-            color: #00C584;
-        }
-        .city-select-wrap {
-            button {
-                &.btn {
-                    border: 1px solid #00C584;
-                }
-                &.btn-warning {
-                    color: #333;
-                    background-color: #fff;
-                }
-                &.btn-primary {
-                    color: #fff;
-                    background-color: #00C584;
-                }
-            }
-        }
-        .city-select a.active {
-            background-color: #00C584;
-        }
-        .city-select-tab > a.active {
-            color: #00C584;
-        }
-        .city-select a:hover,
-        .city-select a:focus {
-            color: #00C584;
-            background-color: #f1f8ff;
-        }
-        .pageTips {
-            padding-left: 30px;
-            .tooltip {
-                width: 450px !important;
-                .tooltip-inner {
-                    text-align: left;
-                    max-width: 450px;
-                }
-            }
-        }
-    }
-    .module.pie {
-        .echarts {
-            height: 240px;
-        }
-        .earth .echarts {
-            height: 400px;
-        }
-        .table > thead > tr > th {
-            border-bottom: 0px solid;
-        }
-        .table {
-            thead > tr > td,
-            tbody > tr > td {
-                border-top: 1px solid #E1E1E1;
-                padding: 12px;
-            }
-            .progress {
-                width: 80%;
-                border-radius: 0;
-                margin-bottom: 0px;
-                background-color: #fff;
-                border: none;
-                box-shadow: none;
-                .progress-bar {
-                    height: 10px;
-                    margin-top: 5px;
-                    background-color: #00C584;
-                    border-radius: 0px 5px 5px 0;
-                }
-                > span {
-                    padding-left: 10px;
-                    float: left;
-                    line-height: 20px;
-                }
-            }
-        }
-    }
     .row.module {
         .x_panel {
             border: none
@@ -111,7 +13,8 @@
                 }
             }
         }
-        > div > .x_panel,.module-app > .x_panel {
+        > div > .x_panel,
+        .module-app > .x_panel {
             border: 1px solid #eee;
             margin-top: 40px;
             padding: 0px 0px;
@@ -143,11 +46,19 @@
         }
         .x_content {
             padding: 0px 8px 6px;
-        }   
+        }
     }
-    .search{
-        .ivu-col{
+    .search {
+        .ivu-col {
             margin: 5px 0px;
+        }
+    }
+    .search {
+        .ivu-row:first-child {
+            position: absolute;
+            z-index: 999;
+            top: -48px;
+            left: 200px;
         }
     }
 }

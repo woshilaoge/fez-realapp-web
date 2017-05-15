@@ -27,16 +27,19 @@ export default {
      * [页面查询条件初始化]
      * @return {[Array]} [数组，Q.all返回的数据]
      * Q.allSettled return [{state:'fulfilled',value:'返回数据'}]
-     * 一级部门、模式、渠道 下拉框初始化
+     * 一级部门、模式、渠道 、终端 下拉框初始化
      */
     get: () => {
+
         return Q.Promise((resolve, reject) => {
             Q.allSettled([
                 Api.get(M['API']['GETDEPT'], { "deptLev": 1 }),
                 Api.get(M['API']['GETTYPE']),
-                Api.get(M['API']['GETCHANNEL'])
+                Api.get(M['API']['GETCHANNEL']),
+                Api.get(M['API']['GETTERM'])
             ]).then(function(results) {
                 const moduletData = [
+                    [],
                     [],
                     [],
                     []
@@ -74,12 +77,7 @@ export default {
         return Q.Promise((resolve, reject) => {
             Api.get(M['API']['GETERP'], id).then((data) => {
 
-                resolve(data.map(function(obj) {
-                    return {
-                        "label": obj.name,
-                        "value": obj.name
-                    }
-                }));
+               resolve(FormatSelect(data));
             });
         });
     },

@@ -8,7 +8,7 @@
         <v-loading v-model="loading"></v-loading>
     </div>
 </template>
-<script scoped>
+<script>
 import Service from './service';
 
 import vPanel from '../../../public/components/panel.vue';
@@ -48,9 +48,9 @@ export default {
                 const _vm = this;
                 _vm.loading = true;
                 //模拟请求相应时间，接口联调可注掉
-                setTimeout(() => {
+                // setTimeout(() => {
                     _vm.serviceGet();
-                }, 1000)
+                // }, 1000)
             },
             deep: true
         }
@@ -59,6 +59,7 @@ export default {
     methods: {
         serviceGet: function() {
             const _vm = this;
+
             Service.get(_vm.params).then((data) => {
                 _vm.echartOptArr = data.moduleData;
                 _vm.loading = false;

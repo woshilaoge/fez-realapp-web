@@ -38,8 +38,8 @@ export default {
         vLegend,
     },
     mounted() {
-
-    },
+     
+    },  
     methods: {
         changeRadio(val) {
             this.selectRadio = val;

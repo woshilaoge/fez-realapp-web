@@ -8,17 +8,17 @@
             </Select>
             </Col>
             <Col :xs="12" :sm="12" :md="3">
-            <Select v-model="dept2Id" placeholder="二级部门（全部）" clearable @on-change="getCascader3" :disabled="!dept2List.length">
+            <Select v-model="dept2Id" placeholder="二级部门（全部）" clearable @on-change="getCascader3" :disabled="!dept1Id">
                 <Option v-for="item in dept2List" :value="item.value" :key="item">{{ item.label }}</Option>
             </Select>
             </Col>
             <Col :xs="12" :sm="12" :md="3">
-            <Select v-model="dept3Id" placeholder="三级部门（全部）" clearable @on-change="getErpCascader" :disabled="!dept3List.length">
+            <Select v-model="dept3Id" placeholder="三级部门（全部）" clearable @on-change="getErpCascader" :disabled="!dept2Id">
                 <Option v-for="item in dept3List" :value="item.value" :key="item">{{ item.label }}</Option>
             </Select>
             </Col>
             <Col :xs="12" :sm="12" :md="3">
-            <Select v-model="erp" placeholder="销售员ERP（全部）" clearable :disabled="!erpList.length">
+            <Select v-model="erp" placeholder="销售员ERP（全部）" clearable :disabled="!dept3Id">
                 <Option v-for="item in erpList" :value="item.value" :key="item">{{ item.label }}</Option>
             </Select>
             </Col>
@@ -28,7 +28,7 @@
             </Select>
             </Col>
             <Col :xs="12" :sm="12" :md="3">
-            <Select v-model="channel" placeholder="渠道（全部）" clearable @on-change="getTermCascader" :disabled="!channelList.length">
+            <Select v-model="channel" placeholder="渠道（全部）" clearable :disabled="!channelList.length">
                 <Option v-for="item in channelList" :value="item.value" :key="item">{{ item.label }}</Option>
             </Select>
             </Col>
@@ -46,132 +46,151 @@
 </template>
 <script>
 import Service from './service';
+import {
+    getUrlParam
+} from 'public/utils/utils';
 
 export default {
-    components: {
-
-    },
     data() {
-        return {
-            dept1List: [],
-            dept2List: [],
-            dept3List: [],
-            erpList: [],
-            typeList: [],
-            channelList: [],
-            termList: [],
-
-
-            dept1Id: '',
-            dept2Id: '',
-            dept3Id: '',
-            erp: '',
-            type: '',
-            channel: '',
-            term: '',
-
-            isSearch: true
-        }
-    },
-    created() {
-        this.serviceGet();
-    },
-    computed: {
-        params() {
-            const _vm = this;
             return {
-                "dept1Id": _vm.dept1Id,
-                "dept2Id": _vm.dept2Id,
-                "dept3Id": _vm.dept3Id,
-                "queryErp": _vm.erp,
-                "channel": _vm.channel,
-                "terminal": _vm.term,
-                "businessMode": _vm.type
+                dept1List: [],
+                dept2List: [],
+                dept3List: [],
+                erpList: [],
+                typeList: [],
+                channelList: [],
+                termList: [],
+
+
+                dept1Id: '',
+                dept2Id: '',
+                dept3Id: '',
+                erp: '',
+                type: '',
+                channel: '',
+                term: '',
+
+                pageType: 'hour',
+                isSearch: true,
             }
-        }
-    },
-    watch: {
-        /**
-         * [当搜索条件没有改变，点击查询，不会再次查询，同时也防止点击多次，查询多次的情况]
-         * @type {Object}
-         */
-        params: {
-            handler: function(val, oldVal) {
-                this.isSearch = true;
+        },
+        created() {
+            this.serviceGet();
+        },
+        mounted() {
+            const _vm = this;
+            const type = getUrlParam('type');
+            _vm.pageType = type || _vm.pageType;
+            if (type) { //如果不是按小时的页面，则提示按分钟标题
+                _vm.$root.$children[0].TITLECONF.NAME = '总体概览按分钟';
+            }
+        },
+        computed: {
+            params() {
+                const _vm = this;
+                /**
+                 * 请求接口所需参数
+                 */
+                return {
+                    "deptId1s": _vm.dept1Id,
+                    "deptId2s": _vm.dept2Id,
+                    "deptId3s": _vm.dept3Id,
+                    "erp": _vm.erp,
+                    "channelFlag": _vm.channel,
+                    "terminal": _vm.term,
+                    "model": _vm.type,
+                    "pageType": _vm.pageType
+                }
+            }
+        },
+        watch: {
+            /**
+             * [当搜索条件没有改变，点击查询，不会再次查询，同时也防止点击多次，查询多次的情况]
+             * @type {Object}
+             */
+            params: {
+                handler: function(val, oldVal) {
+                    this.isSearch = true;
+                },
+                deep: true
+            }
+        },
+
+        methods: {
+            serviceGet: function() {
+                const _vm = this;
+
+                Service.get().then((data) => {
+                    _vm.dept1List = data[0];
+                    /**
+                     * 这里加上一个特殊逻辑
+                     * 如果一级部门只有一条数据，则默认选中，如果大于一条数据，则默认不选（及全部）
+                     */
+                    if (_vm.dept1List.length === 1) {
+                        _vm.dept1Id = data[0][0].value;
+                    }
+                    _vm.typeList = data[1];
+                    _vm.channelList = data[2];
+                    _vm.termList = data[3];
+                    _vm.search();
+                });
             },
-            deep: true
-        }
-    },
+            search() {
+                const _vm = this;
 
-    methods: {
-        serviceGet: function() {
-            const _vm = this;
-
-            Service.get().then((data) => {
-                _vm.dept1List = data[0];
-                _vm.dept1Id = data[0][0].value;
-                _vm.typeList = data[1];
-                _vm.channelList = data[2];
-                _vm.search();
-            });
-        },
-        search() {
-            const _vm = this;
-            console.log(`搜索======>> `, _vm.params);
-
-            if (_vm.isSearch) {
-                _vm.$emit('input', _vm.params);
-            }
-            _vm.isSearch = false;
-        },
-        getCascader2(val) {
-            const _vm = this;
-            _vm.dept2List = [];
-            if (val) {
-                _vm.getDeptCascader({
-                    'deptLev': 2,
-                    'parentIds': val
-                }, 'dept2List');
-            }
-        },
-        getCascader3(val) {
-            const _vm = this;
-            _vm.dept3List = [];
-            if (val) {
-                _vm.getDeptCascader({
-                    'deptLev': 3,
-                    'parentIds': val
-                }, 'dept3List');
-            }
-        },
-        getErpCascader(val) {
-            const _vm = this;
-            _vm.erpList = [];
-            if (val) {
-                Service.getErpCascader(val).then((data) => {
-                    console.log(data, '<=====ERP 数据');
-                    _vm['erpList'] = data;
+                if (_vm.isSearch) {
+                    _vm.$emit('input', _vm.params);
+                    console.log(`搜索======>> `, _vm.params, _vm.isSearch);
+                }
+                _vm.isSearch = false;
+            },
+            getCascader2(val) {
+                const _vm = this;
+                _vm.dept2Id = '';
+                if (val) {
+                    _vm.getDeptCascader({
+                        'deptLev': 2,
+                        'parentIds': val
+                    }, 'dept2List');
+                }
+            },
+            getCascader3(val) {
+                const _vm = this;
+                _vm.dept3Id = '';
+                if (val) {
+                    _vm.getDeptCascader({
+                        'deptLev': 3,
+                        'parentIds': val
+                    }, 'dept3List');
+                }
+            },
+            getErpCascader(val) {
+                const _vm = this;
+                _vm.erp = '';
+                if (val) {
+                    Service.getErpCascader(val).then((data) => {
+                        console.log(data, '<=====ERP 数据');
+                        _vm['erpList'] = data;
+                    });
+                }
+            },
+            //此联动暂时取消
+            // getTermCascader(val) {
+            //     const _vm = this;
+            //     _vm.termList = [];
+            //     if (val) {
+            //         Service.getTermCascader(val).then((data) => {
+            //             console.log(data, '<=====term 数据');
+            //             _vm['termList'] = data;
+            //         });
+            //     }
+            // },
+            getDeptCascader(val, list) {
+                const _vm = this;
+                Service.getDeptCascader(val).then((data) => {
+                    _vm[list] = data;
                 });
             }
-        },
-        getTermCascader(val) {
-            const _vm = this;
-            _vm.termList = [];
-            if (val) {
-                Service.getTermCascader(val).then((data) => {
-                    console.log(data, '<=====term 数据');
-                    _vm['termList'] = data;
-                });
-            }
-        },
-        getDeptCascader(val, list) {
-            console.log(val);
-            const _vm = this;
-            Service.getDeptCascader(val).then((data) => {
-                console.log(data, '<=====下级数据');
-                _vm[list] = data;
-            });
         }
-    }
 }
 </script>

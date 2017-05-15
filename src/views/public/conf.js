@@ -30,8 +30,8 @@ function MOCK(isMock, MockModule) {
  * 系统后端接口
  * @type {string}
  */
-// const HOST = '//rtdredis.jd.com';
 const HOST = "http://rubik.jddb.com/";
+
 /* @if MOCK */
 /**
  * 系统 是否 MOCK数据 当 gulp dist 时 会自动删除 if MOCK 里代码

@@ -18,8 +18,8 @@ let mockData = {
                         date: "2017-04-25",
                         sdSumOfNum: 718,
                         sdSumOfSales: 358218.2,
-                        ckSumOfNum: 0,
-                        ckSumOfSales: 0,
+                        ckSumOfNum: 12342342,
+                        ckSumOfSales: 42423424232,
                         payedSumOfNum: 552,
                         payedSumOfSales: 266802.4
                     }, {
@@ -35,7 +35,7 @@ let mockData = {
                         sdSumOfNum: 477,
                         sdSumOfSales: 188403.2,
                         ckSumOfNum: 0,
-                        ckSumOfSales: 0,
+                        ckSumOfSales: 24124234.42424324,
                         payedSumOfNum: 29,
                         payedSumOfSales: 14662.8
                     }],
@@ -618,7 +618,10 @@ let mockData = {
             GETDEPT: {
                 "errno": 200,
                 "msg": "成功",
-                "data": [{ "name": "电脑办公业务部", "id": 30 }]
+                "data": [
+                    { "name": "电脑办公业务部1", "id": 30 },
+                    { "name": "电脑办公业务部2", "id": 31 }
+                ]
             },
             GETERP: {
                 "errno": 200,
@@ -630,11 +633,6 @@ let mockData = {
                     { "name": "BJFANGYONG", "id": "BJFANGYONG" },
                     { "name": "BJLINMING", "id": "BJLINMING" }
                 ]
-            },
-            GETDEPT: {
-                "errno": 200,
-                "msg": "成功",
-                "data": [{ "name": "电脑办公业务部", "id": 30 }]
             },
             GETTYPE: {
                 "errno": 200,

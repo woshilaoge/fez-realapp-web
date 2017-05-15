@@ -5,7 +5,7 @@ import CONF from '../../../../conf';
 import { LINE } from '../../../../../public/utils/echarts-colors';
 import { formatFloat, formatY } from '../../../../../public/utils/format';
 
-const Api = CONF.MOCK(false, ['deptcharts']);
+const Api = CONF.MOCK(true, ['deptcharts']);
 
 const M = CONF['deptcharts'];
 /**
@@ -352,7 +352,6 @@ export default {
         return Q.Promise((resolve, reject) => {
             for (let obj of chartsArr) {
                 if (val === obj.dimDesc) {
-
                     const options = formatResult(obj)
                     resolve(options);
                     break;

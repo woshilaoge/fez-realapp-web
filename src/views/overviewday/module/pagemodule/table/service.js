@@ -77,7 +77,7 @@ const formatResult = (data) => {
             'sdddl': obj.sdSumOfNum,
             'sdyhhje': formatMoney(obj.sdSumOfSales, 2),
             'zyckddl': obj.ckSumOfNum,
-            'zyckddje': formatMoney(obj.ckSumOfSales),
+            'zyckddje': formatMoney(obj.ckSumOfSales,2),
             'popzfddl': obj.payedSumOfNum,
             'popzfddje': formatMoney(obj.payedSumOfSales, 2),
         });
@@ -102,9 +102,6 @@ const formatResult = (data) => {
             'popzfddje': formatWarn(obj.ratioOfPaySales),
         });
     });
-
-
-
     return table;
 };
 
@@ -118,8 +115,8 @@ export default {
                 const moduleData = formatResult(data);
 
                 let rtnData = {
-                    // moduleName: M['NAME'],
-                    moduleName: '实时概况（单位：万）',
+                    moduleName: M['NAME'],
+                    // moduleName: '实时概况（单位：万）',
                     moduleIcon: M['ICON'],
                     moduleToolTip: M['TOOLTIP'],
                     moduleData: moduleData,

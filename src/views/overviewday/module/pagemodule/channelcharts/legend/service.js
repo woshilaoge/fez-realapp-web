@@ -5,7 +5,7 @@ import CONF from '../../../../conf';
 import { LINE } from '../../../../../public/utils/echarts-colors';
 import { formatFloat, formatY } from '../../../../../public/utils/format';
 
-const Api = CONF.MOCK(false, ['channelcharts']);
+const Api = CONF.MOCK(true, ['channelcharts']);
 
 const M = CONF['channelcharts'];
 /**

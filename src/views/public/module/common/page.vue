@@ -2,10 +2,10 @@
     <div class="container body">
         <div class="main_container">
             <!-- 边栏 -->
-            <div class="col-md-3 left_col">
+            <div class="col-md-3 left_col" v-if="menu">
                 <div class="left_col scroll-view">
                     <v-logo></v-logo>
-                    <v-menu></v-menu>
+                    <v-menu ></v-menu>
                 </div>
             </div>
             <!-- 顶部导航 -->
@@ -13,7 +13,7 @@
             <!--<v-topbar></v-topbar>-->
             <!--</div>-->
             <!-- page content -->
-            <div class="right_col" role="main">
+            <div class="right_col" role="main" :class="[{'no-menu':!menu}]">
                 <slot></slot>
                 <!-- 页脚 -->
                 <v-footer v-if="footer"></v-footer>
@@ -53,6 +53,10 @@ export default {
         footer: {
             type: [Boolean],
             default:true
+        },
+        menu:{
+            type: [Boolean],
+            default:false
         }
     }
 }

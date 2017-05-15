@@ -7,7 +7,7 @@ PNotify.prototype.options.styling = "bootstrap3";
 
 export default {
     get: (url, opt) => {
-        if (typeof opt !== 'object') {
+        if ((typeof opt === 'number')||(typeof opt === 'string')) {
             url += '/' + opt;
             opt = null;
         }
