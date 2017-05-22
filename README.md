@@ -1,11 +1,26 @@
 fez-realapp-web
 ====
-powerby echarts3+vue2+iview+mock
+powerBy echarts3+vue2+iview+mock
 
 By xiaoxianxuezhang   2017/4/26
 
 
 ## UI库iView（ https://www.iviewui.com ）
+
+# 使用--------------------------------------
+基于FEZ构建的Vue单文件组件形式的模块化开发示例
+
+> 本示例演示了基于FEZ构建vue单文件组件形式的开发结构，借助 FEZ 可以使用es6标准特性开发项目。
+
+## 使用方法
+
+- 本示例依赖 【[FEZ前端模块化工程开发框架](https://github.com/furic-zhao/fez)】请先`git clone https://github.com/furic-zhao/fez.git` 下载 FEZ工程框架 到本地任意目录
+
+- 进入 FEZ 工程目录（cd fez），执行 `git clone https://github.com/woshilaoge/fez-realapp-web.git` 将本示例下载到 FEZ 根目录
+
+- 进入 fez-realapp-web (cd fez-realapp-web)目录 执行 `gulp` 或 `gulp dev`,FEZ 会自动打开系统默认浏览器并进入研发环境。
+
+> 若项目不在FEZ工程根目录，请自行修改项目目录中的`gulpfile.babel.js`文件中的路径。
 
 ### JS目录结构
 
